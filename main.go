@@ -48,10 +48,10 @@ func main() {
 
 	opts := MQTT.NewClientOptions().AddBroker(c.MQTTServer)
 	opts.SetClientID("DFS-low_energy_sensor_localizer")
-	opts.SetDefaultPublishHandler(withConfig(&c))
+	opts.SetDefaultPublishHandler(handleWithConfig(&c))
 
 	opts.OnConnect = func(mc MQTT.Client) {
-		if token := mc.Subscribe(c.Rtl433Topic, 0, withConfig(&c)); token.Wait() && token.Error() != nil {
+		if token := mc.Subscribe(c.Rtl433Topic, 0, handleWithConfig(&c)); token.Wait() && token.Error() != nil {
 			panic(token.Error())
 		}
 	}
@@ -101,7 +101,7 @@ func makeTopicPath(path ...string) string {
 	return s.String()
 }
 
-func withConfig(c *Config) MQTT.MessageHandler {
+func handleWithConfig(c *Config) MQTT.MessageHandler {
 	var mh MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message) {
 
 		if len(c.Oregons) == 0 {
