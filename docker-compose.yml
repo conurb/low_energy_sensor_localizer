@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  rtl433:
+    container_name: rtl433
+    build: ./rtl_433/.
+    image: rtl_433:latest
+    restart: unless-stopped
+    env_file:
+      - ./rtl_433/rtl_433.env
+    devices:
+      - /dev/bus/usb
+    volumes:
+      - low-energy-sensor-localizer-config:/config
+
+volumes:
+  low-energy-sensor-localizer-config:
+    name: low_energy_sensor_localizer_config
