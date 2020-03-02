@@ -4,5 +4,5 @@ go 1.13
 
 require (
 	github.com/eclipse/paho.mqtt.golang v1.2.0
-	github.com/influxdata/influxdb-client-go v0.1.5
+	golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3 // indirect
 )
