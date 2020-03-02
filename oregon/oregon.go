@@ -41,20 +41,12 @@ func Contains(s []Config, r Rtl433) (*Config, bool) {
 	return nil, false
 }
 
-// SensorBase are common base datas (always sent to MQTT)
-type SensorBase struct {
-	Time     string `json:"time"`
-	ID       int    `json:"id"`
-	Floor    string `json:"floor"`
-	Location string `json:"location"`
-}
-
-// Measurements are all measurements sent by the Oregon sensor
-// used to send datas to influxdb
-type Measurements struct {
-	*SensorBase
+// Sensor are datas sent to MQTT
+type Sensor struct {
+	Time        string  `json:"time"`
+	ID          int     `json:"id"`
 	Temperature float64 `json:"temperature"`
 	Humidity    float64 `json:"humidity,omitempty"`
 	Pressure    float64 `json:"pressure,omitempty"`
-	Battery     float64 `json:"battery,omitempty"`
+	Battery     string  `json:"battery,omitempty"`
 }
